@@ -1,0 +1,123 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'DM Serif Display', serif;
+    font-family: 'Poppins', sans-serif;
+}
+.body{
+    background : linear-gradient(rgba(5,7,12,0.75), rgba(5,7,12,0.75)), url("../img/graduation.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center ;   
+
+}
+
+/*Menu*/
+.toggle-menu{
+    position:absolute;
+    top: 0.5rem;
+    right: 1.5rem;
+    cursor: pointer;
+    filter: invert(1);
+    width: 40px;
+    z-index: 10;
+}
+.img-menu{
+    width: 77%;
+    padding-top: 5px;
+}
+@media screen and (min-width:768px ){ 
+    .toggle-menu{
+    display: none;
+}}
+
+.main-menu{
+    list-style: none;
+    margin-top: 0;
+    margin-bottom:0;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    transition: transform 0.3s;
+    transform: translateY(-100%);
+}
+.main-menu--show{
+    transform: translateY(0);
+}
+@media screen and (min-width:768px) {
+    .main-menu{
+        flex-direction:row;
+        transform: translateY(0);
+    }
+}
+    
+
+.main-menu_item{
+    padding: 1em;
+}
+.main-menu_link{
+    color: aliceblue;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.contenedor {
+	max-width: 1200px;
+	width: 90%;
+	margin: auto;
+}
+
+
+
+/*texto*/
+.main .imgText{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    width: 100%;
+    z-index: 90;
+}
+.imgText .text{
+    font-size: 14px;
+    font-weight:400 ;
+    color:aliceblue
+}
+.imgText h2{
+font-size: 45px;
+font-weight: 600;
+color: aliceblue;
+}
+/*boton*/
+a.button{
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius:25px;
+    color: #0d0d0d;
+    background:aliceblue;
+    text-decoration: none;
+    margin-top: 25px;
+    transition: all 0.3s ease;
+}
+a.button:hover{
+    color: aliceblue ;
+    background-color: #0d0d0d;
+}
+/*formulario*/
+.formulario{
+    display: flex;
+justify-content: center;
+align-content: center;
+}
+.form{
+    max-width: max-content;
+    background-color: #0d0d0d;
+    padding: 5px;
+    border-radius: 5%;
+    color: aliceblue;
+}
