@@ -67,3 +67,80 @@ if (interes=="Si") {
     
 }  
   
+// //Posibles universidades según tu promedio escolar
+// function sacarPromedio(notas, calcularPromedio) {
+//     let resulPromedio = notas/calcularPromedio;
+//     return resulPromedio;
+// }
+// let exit = false;
+// let promedio = parseInt( prompt('¿Sabes tu promedio de secundaria? \n 1-Si \n 2-No \n 3-Salir'));
+// //Arreglar while while (promedio>3 || promedio <1){ }
+
+// switch (promedio) {
+
+//     case 1:
+//         let numPromedio = parseInt(prompt('Coloca tu promedio  o escribe un numero mayor a 10 para salir'));
+//         while (!exit) {
+//                 switch (true) {
+//                     case numPromedio >= 1 && numPromedio <= 3:
+//                         console.log ('Con un promedio de 1 a 3 te recomendamos la Universidad A');
+//                         exit = true;
+//                         break;
+//                     case numPromedio >= 4 && numPromedio <= 6:
+//                         console.log ('Con un promedio de 4 a 6 te recomendamos la Universidad B');
+//                         exit = true;
+//                         break;
+//                     case numPromedio >= 7 && numPromedio <= 8:
+//                         console.log ('Con un promedio de 7 a 8 te recomendamos la Universidad C');
+//                         exit = true;
+//                         break;
+//                     case numPromedio >= 9 && numPromedio <= 10:
+//                         console.log ('Con un promedio de 9 a 10 te recomendamos la Universidad D');
+//                         exit = true;
+//                         break;
+//                     case numPromedio>10:
+//                         exit = true;
+//                         break
+//                 }
+//             }
+//         break;
+//     //No sabe promedio
+//     case 2:
+//         let calcularPromedio = parseInt(prompt("Coloca el numero de cantidad de materias que tuviste en ultimo año"));
+//         let notas = 0;
+//         let resulPromedio=0;
+//         for (let i = 0; i < calcularPromedio; i++) {
+//             notas += parseInt(prompt('Ingresa tus notas'));
+//         }
+//         let finalPromedio = sacarPromedio(notas, calcularPromedio);
+    
+//         while (!exit) {
+//         switch (true) {
+//             case finalPromedio >= 1 && finalPromedio <= 3:
+//                 console.log ('Con un promedio de 1 a 3 te recomendamos la Universidad A');
+//                 exit = true;
+//                 break;
+//             case finalPromedio >= 4 && finalPromedio <= 6:
+//                 console.log ('Con un promedio de 4 a 6 te recomendamos la Universidad B');
+//                 exit = true;
+//                 break;
+//             case finalPromedio >= 7 && finalPromedio <= 8:
+//                 console.log ('Con un promedio de 7 a 8 te recomendamos la Universidad C');
+//                 exit = true;
+//                 break;
+//             case finalPromedio >= 9 && finalPromedio <= 10:
+//                 console.log ('Con un promedio de 9 a 10 te recomendamos la Universidad D');
+//                 exit = true;
+//                 break
+//             }
+
+//         }
+//     break
+//     case 3:
+//         alert("Adios")
+//     break
+//     default:
+//         let incorrecto= alert('Aprete "ok" e ingrese un numero que este dentro de los parámetros')
+//         let promedio = prompt('¿Sabes tu promedio de secundaria? \n 1-Si \n 2-No \n 3-Salir');
+//         break;
+// }
