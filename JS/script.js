@@ -1,163 +1,131 @@
-// Eventos y DOM del Menu 
-const toggleMenuElement=document.getElementById('toggle-menu');
-const mainMenuElement= document.getElementById('main-menu');
-toggleMenuElement.addEventListener('click',()=>{
-    mainMenuElement.classList.toggle('main-menu--show')
-})
+//utilizado en este documento: Arrays, Bucles, Funciones, DOM, API POKEMON(Fetch por ende)
 
-//Perteneciente a HTML infoUni
-//Constructor del objeto Universidad
-class Universidad {
-    constructor (nombre, promedioMinimo,ubicacion,arancel, facultades){
-        this.nombre=nombre
-        this.promedioMinimo= promedioMinimo
-        this.ubicacion=ubicacion
-        this.arancel=arancel
-        this.facultades=facultades
-     }
+//Array
+const pokeContainer= document.querySelector (".pokemon-container")
+const spinner = document.querySelector("#spinner");
+const previous = document.querySelector("#previous");
+const next = document.querySelector("#next");
+
+let limit = 8;
+let offset = 1;
+//Eventos
+//Que no coloquen anterior en la pag 1
+previous.addEventListener("click", () => {
+  if (offset != 1) {
+    offset -= 9;
+    removeChildNodes(pokeContainer);
+    fetchPokemons(offset, limit);
+  }
+});
+
+next.addEventListener("click", () => {
+  offset += 9;
+  removeChildNodes(pokeContainer);
+  fetchPokemons(offset, limit);
+});
+
+//Traer pokemones de la API
+function fetchPokemon(id) {
+  fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
+    .then((res) => res.json())
+    .then((data) => {
+      createPokemon(data);
+      spinner.style.display = "none";
+    });
 }
-//Array de  universidades
-const universidades=[];
-universidades.push(new Universidad("Universidad A", "1-3", "Barcelona, España", "Privada","Facultades= Dercho, Humanidades, Turismo"))
-universidades.push(new Universidad("Universidad D","9-10","Buenos Aires, Argentina", "Privada","Facultades: Humanidades, Ciencias economicas, Informatica, Cocina"))
-universidades.push(new Universidad("Universidad C","7-8","La Plata, Argentina","Publica","Facultades: Humanidades, Ciencias economicas, matematicas"))
-universidades.push(new Universidad("Universidad B", "4-6"," Madrid, España", "Publica","Facultades: CIencias economicas, Derecho, Ciencias de la computación"))
 
-//Stringfy JSON
-  const universidadesJSON= JSON.stringify(universidades)
- // console.log(universidadesJSON)
-
-//Parse JSON
-const devolverUniversidades= JSON.parse(universidadesJSON)
-const muestraUniveridades=JSON.parse(localStorage.getItem(devolverUniversidades))
-
-// Filtros por arancel y por pais
-const uniPublicas= universidades.filter((el)=>el.arancel.includes('Publica'));
-const uniPrivadas= universidades.filter((el)=>el.arancel.includes('Privada'));
-
-const uniArg= universidades.filter((el)=>el.arancel.includes('Argentina'));
-const uniEsp= universidades.filter((el)=>el.arancel.includes('España'));
-
-
-// if (interes=="Si") {
-//  let opcionInteres= prompt('Presiona: \n 1-Todas las Universidades \n 2-Universidades Publicas \n 3-Universidades privadas' )
-//  switch (opcionInteres) {
-//     case 1:
-//         for (const Universidad of universidades) {
-//             console.log(`Nombre: ${Universidad.nombre}`)
-//             console.log(`Promedio minimo necesario: ${Universidad.promedioMinimo}`)
-//             console.log(`Ubicación: ${Universidad.ubicacion}`)
-//             console.log(`Arancelada: ${Universidad.arancel}`)
-//             console.log(`Facultades: ${Universidad.facultades}`)
-//         }
-//         break;
-//     case 2:
-//       for (const uniPublicas of universidades) {
-//         console.log(`Nombre: ${Universidad.nombre}`)
-//         console.log(`Promedio minimo necesario: ${Universidad.promedioMinimo}`)
-//         console.log(`Ubicación: ${Universidad.ubicacion}`)
-//         console.log(`Arancelada: ${Universidad.arancel}`)
-//         console.log(`Facultades: ${Universidad.facultades}`)
-//       }
-//       break
-//       case 3:
-//       for (const uniPrivadas of universidades) {
-//         console.log(`Promedio minimo necesario: ${Universidad.promedioMinimo}`)
-//         console.log(`Ubicación: ${Universidad.ubicacion}`)
-//         console.log(`Arancelada: ${Universidad.arancel}`)
-//         console.log(`Facultades: ${Universidad.facultades}`)
-//       }
-    
- 
-//     default:
-//         break;
-//     }
-    
-// }  
-
-//PRIMERA PREENTREGA
-//Perteneciente a HTML PROMEDIO
-//Posibles universidades según tu promedio escolar
-function sacarPromedio(notas, calcularPromedio) {
-    let resulPromedio = notas/calcularPromedio;
-    return resulPromedio;
+function fetchPokemons(offset, limit) {
+  spinner.style.display = "block";
+  for (let i = offset; i <= offset + limit; i++) {
+    fetchPokemon(i);
+  }
 }
-let exit = false;
-let promedio =parseInt(document.getElementById("promedio"));
-//Storage
-let promedioStorage=sessionStorage(promedio);
+//cartitas
+function createPokemon(pokemon) {
+  const flipCard = document.createElement("div");
+  flipCard.classList.add("flip-card");
 
-//Arreglar while while (promedio>3 || promedio <1){ }
+  const cardContainer = document.createElement("div");
+  cardContainer.classList.add("card-container");
 
-//variable para innerHTML
-let resultados= document.getElementById("contenedorResultados")
-// Agregue algunos eventos y DOM
-// switch (promedio) {
-//     case 1:
-//         let numPromedio = parseInt(document.getElementById('numPromedio'));
-//         while (!exit) {
-//                 switch (true) {
-//                     case numPromedio >= 1 && numPromedio <= 3:
-//                       resultados.innerHTML="<p>Con un promedio de 1 a 3 te recomendamos la  <a href=# class='aUniver'> Universidad A </a></p>"
-//                         // console.log ('Con un promedio de 1 a 3 te recomendamos la Universidad A');
-//                         exit = true;
-//                         break;
-//                     case numPromedio >= 4 && numPromedio <= 6:
-//                       resultados.innerHTML="<p>Con un promedio de 4 a 6 te recomendamos la  <a href=# class='aUniver'> Universidad B </a></p>"
-//                         // console.log ('Con un promedio de 4 a 6 te recomendamos la Universidad B');
-//                         exit = true;
-//                         break;
-//                     case numPromedio >= 7 && numPromedio <= 8:
-//                         resultados.innerHTML="<p>Con un promedio de 7 a 8 te recomendamos la  <a href=# class='aUniver'> Universidad C </a></p>"
-//                         // console.log ('Con un promedio de 7 a 8 te recomendamos la Universidad C');
-//                         exit = true;
-//                         break;
-//                     case numPromedio >= 9 && numPromedio <= 10:
-//                       resultados.innerHTML="<p>Con un promedio de 9 a 10 te recomendamos la <a href=# class='aUniver'> Universidad D </a></p>"
-//                         // console.log ('Con un promedio de 9 a 10 te recomendamos la Universidad D');
-//                         exit = true;
-//                         break;
-//                     case numPromedio>10:
-//                         exit = true;
-//                         break
-//                 }
-//             }
-//         break;
-//     //No sabe promedio
-//     case 2:
-//         let calcularPromedio = parseInt(document.getElementById("materiasUltimoAño"));
-//        let calculoStorage=sessionStorage(calcularPromedio);
-//         let notas = 0;
-//         let resulPromedio=0;
-//         for (let i = 0; i < calcularPromedio; i++) {
-//             notas += parseInt(document.getElementById('notas'));
-//         }
-//         let finalPromedio = sacarPromedio(notas, calcularPromedio);
-    
-//         while (!exit) {
-//         switch (true) {
-//             case finalPromedio >= 1 && finalPromedio <= 3:
-//               resultados.innerHTML="<p>Con un promedio de 1 a 3 te recomendamos la  <a href=# class='aUniver'> Universidad A </a></p>";
-//                 exit = true;
-//                 break;
-//             case finalPromedio >= 4 && finalPromedio <= 6:
-//               resultados.innerHTML="<p>Con un promedio de 4 a 6 te recomendamos la  <a href=# class='aUniver'> Universidad B </a></p>"
-//                 exit = true;
-//                 break;
-//             case finalPromedio >= 7 && finalPromedio <= 8:
-//               resultados.innerHTML="<p>Con un promedio de 7 a 8 te recomendamos la  <a href=# class='aUniver'> Universidad C</a></p>"
-//                 exit = true;
-//                 break;
-//             case finalPromedio >= 9 && finalPromedio <= 10:
-//               resultados.innerHTML="<p>Con un promedio de 9 a 10 te recomendamos la  <a href=# class='aUniver'> Universidad D </a></p>"
-//                 exit = true;
-//                 break
-//             }
+  flipCard.appendChild(cardContainer);
 
-//         }
-//     break
-//     default:
-//         let incorrecto= alert('Aprete "ok" e ingrese un numero que este dentro de los parámetros')
-//         let promedio =parseInt(document.getElementById("promedio"));
-//         break;
-//  }
+  const card = document.createElement("div");
+  card.classList.add("pokemon-block");
+
+//Contenedor de imagen 
+  const spriteContainer = document.createElement("div");
+  spriteContainer.classList.add("img-container");
+
+  const sprite = document.createElement("img");
+  sprite.src = pokemon.sprites.front_default;
+
+//Contenedor para fondo de pokemon
+  spriteContainer.appendChild(sprite);
+
+//Numero de Pokemon
+  const number = document.createElement("p");
+  number.textContent = `#${pokemon.id.toString().padStart(3, 0)}`;
+
+  const name = document.createElement("p");
+  name.classList.add("name");
+  name.textContent = pokemon.name;
+
+  card.appendChild(spriteContainer);
+  card.appendChild(number);
+  card.appendChild(name);
+
+  const cardBack = document.createElement("div");
+  cardBack.classList.add("pokemon-block-back");
+
+  cardBack.appendChild(progressBars(pokemon.stats));
+
+  cardContainer.appendChild(card);
+  cardContainer.appendChild(cardBack);
+  pokeContainer.appendChild(flipCard);
+}
+
+//Stats de pokemones (funciones, generar dom)
+function progressBars(stats) {
+  const statsContainer = document.createElement("div");
+  statsContainer.classList.add("stats-container");
+
+  for (let i = 0; i < 3; i++) {
+    const stat = stats[i];
+
+    const statPercent = stat.base_stat / 2 + "%";
+    const statContainer = document.createElement("stat-container");
+    statContainer.classList.add("stat-container");
+
+    const statName = document.createElement("p");
+    statName.textContent = stat.stat.name;
+
+    const progress = document.createElement("div");
+    progress.classList.add("progress");
+
+    const progressBar = document.createElement("div");
+    progressBar.classList.add("progress-bar");
+    progressBar.setAttribute("aria-valuenow", stat.base_stat);
+    progressBar.setAttribute("aria-valuemin", 0);
+    progressBar.setAttribute("aria-valuemax", 200);
+    progressBar.style.width = statPercent;
+
+    progressBar.textContent = stat.base_stat;
+
+    progress.appendChild(progressBar);
+    statContainer.appendChild(statName);
+    statContainer.appendChild(progress);
+
+    statsContainer.appendChild(statContainer);
+  }
+
+  return statsContainer;
+}
+//Que se vean las nuevas cartas a medida que pasas de pagina y no queden las viejas. utilización de un bucle
+function removeChildNodes(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+}
+
+fetchPokemons(offset, limit);
