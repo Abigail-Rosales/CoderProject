@@ -1,141 +1,97 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'DM Serif Display', serif;
-    font-family: 'Poppins', sans-serif;
-}
-.body{
-    background : linear-gradient(rgba(5,7,12,0.75), rgba(5,7,12,0.75)), url("../img/graduation.jpg");
+body {
+    background: rgb(252, 65, 59);
+    background: linear-gradient(
+      90deg,
+      rgb(204, 54, 54) 0%,
+      rgb(240, 108, 108) 54%,
+      rgb(242, 209, 182) 82%
+    );
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Oswald", sans-serif;
+  }
+  
+  h1 {
+    color: white;
+  }
+  
+  .pokemon-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    margin-top: 20px;
+  }
+  
+  .pokemon-block,
+  .pokemon-block-back {
+    border-radius: 10px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+  }
+  
+  .img-container {
+    background-image: url("./blob.svg");
     background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center ;   
-
-}
-
-/*Menu*/
-.toggle-menu{
-    position:absolute;
-    top: 0.5rem;
-    right: 1.5rem;
-    cursor: pointer;
-    filter: invert(1);
-    width: 40px;
-    z-index: 10;
-}
-.img-menu{
-    width: 77%;
-    padding-top: 5px;
-}
-@media screen and (min-width:768px ){ 
-    .toggle-menu{
+    background-position: center;
+  }
+  
+  .pokemon-block p {
+    margin: 5px;
+  }
+  
+  .name {
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  #spinner {
     display: none;
-}}
-
-.main-menu{
-    list-style: none;
-    margin-top: 0;
-    margin-bottom:0;
-    padding-left: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: black;
-    transition: transform 0.3s;
-    transform: translateY(-100%);
-}
-.main-menu--show{
-    transform: translateY(0);
-}
-@media screen and (min-width:768px) {
-    .main-menu{
-        flex-direction:row;
-        transform: translateY(0);
-    }
-}
-    
-
-.main-menu_item{
-    padding: 1em;
-}
-.main-menu_link{
-    color: aliceblue;
-    text-transform: uppercase;
-    text-decoration: none;
-}
-
-.contenedor {
-	max-width: 1200px;
-	width: 90%;
-	margin: auto;
-}
-
-
-
-/*texto*/
-.main .imgText{
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
-    text-align: center;
+  }
+  
+  .pagination {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+  }
+  
+  .card-container {
+    position: relative;
     width: 100%;
-    z-index: 90;
-}
-.imgText .text{
-    font-size: 14px;
-    font-weight:400 ;
-    color:aliceblue
-}
-.imgText h2{
-font-size: 45px;
-font-weight: 600;
-color: aliceblue;
-}
-/*boton*/
-a.button{
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius:25px;
-    color: #0d0d0d;
-    background:aliceblue;
-    text-decoration: none;
-    margin-top: 25px;
-    transition: all 0.3s ease;
-}
-a.button:hover{
-    color: aliceblue ;
-    background-color: #0d0d0d;
-}
-/*InfoUniversidades*/
-.bodyInfo{
-    background-color: #0d0d0d;
-}
-.sectionUnis{
-    display:flexbox;
-    flex-wrap: wrap;
-    padding: 14vh;
-
-}
-.universidad{
-    margin: 10px;
-    padding: 15px;
-}
-.imgUni{
-    max-height: 250px;
-}
-
-/*formulario*/
-.formulario{
-    display: flex;
-justify-content: center;
-align-content: center;
-}
-.form{
-    max-width: max-content;
-    background-color: #000000;
-    padding: 5px;
-    border-radius: 5%;
-    color: aliceblue;
-}
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+  
+  .flip-card:hover .card-container {
+    transform: rotateY(180deg);
+  }
+  
+  .pokemon-block,
+  .pokemon-block-back {
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+  
+  .pokemon-block-back {
+    transform: rotateY(180deg);
+    position: absolute;
+    top: 0%;
+  }
+  
+  .stat-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    text-align: left;
+  }
